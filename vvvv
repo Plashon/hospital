@@ -1,23 +1,49 @@
 <?php
-if(isset($_GET['p_name'])):
-    echo "<br>" . $_GET['p_name'];
+if(isset($_GET['p_name'])&&$_GET['p_name'] !=null){
+      echo "<br> get value =".$_GET['p_name'];  
     require 'connect.php';
-    $count =0;
-    $sql = "SELECT * FROM patient where p_name = :p_name";
+ 
+    $sql = "SELECT * FROM patient where p_name like CONCAT('%',:p_name,'%')";
+
     $stmt = $conn->prepare($sql);
+
     $stmt->bindParam(':p_name',$_GET['p_name']);
+
     $stmt->execute();
+   
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    echo"<br>****************<br>";
     
     while($row = $stmt->fetch()){
         echo $row['p_name'].''.$row['p_name']."<br/>";
         $count++;
-
     }
+    echo"count...".$count;
+}
+  
 //echo"count...".$count;
 if($count==0)
 echo "<br>No data...<br/>";
 $conn = null;
-endif;
+//endif;
 ?>
+
+     <table width="300" border="1">
+  <tr>
+    <th width="325">รหัสคนไข้</th>
+    <td width="240"><?php echo $result['p_id']; ?></td>
+  </tr>
+
+  <tr>
+    <th width="130">ชื่อ</th>
+    <td><?php echo $result['p_name']; ?></td>
+  </tr>
+ 
+  <tr>
+    <th width="130">เมลคนไข้</th>
+    <td><?php echo $result['p_username']; ?></td>
+  </tr>
+  <tr>
+    <th width="130">ยอดหนี้</th>
+    <td><?php echo $result['p_debt']; ?></td>
+  </tr>
+  </table>

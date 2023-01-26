@@ -11,7 +11,7 @@ try {
     );
  
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo 'You are now connecting to database!';
+    //echo 'You are now connecting to database!';
  
 } catch (PDOException $e) {
     echo 'Sorry! You cannot connect to database: ' . $e->getMessage();
