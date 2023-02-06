@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 26, 2023 at 03:23 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Host: localhost
+-- Generation Time: Feb 06, 2023 at 04:32 AM
+-- Server version: 8.0.17
+-- PHP Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -28,17 +29,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `patient` (
-  `P_id` char(3) NOT NULL,
-  `P_name` varchar(255) NOT NULL,
-  `P_DOB` date NOT NULL,
-  `P_debt` varchar(15) DEFAULT NULL
+  `p_id` char(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `p_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `p_date` date NOT NULL,
+  `p_debt` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`P_id`, `P_name`, `P_DOB`, `P_debt`) VALUES
+INSERT INTO `patient` (`p_id`, `p_name`, `p_date`, `p_debt`) VALUES
 ('p01', 'Teera Wannai', '1989-01-23', '2210.5'),
 ('p02', 'Somchai Tainoi', '1999-10-10', '156.25');
 
@@ -49,15 +50,15 @@ INSERT INTO `patient` (`P_id`, `P_name`, `P_DOB`, `P_debt`) VALUES
 --
 
 CREATE TABLE `permissions` (
-  `P_CID` char(3) NOT NULL,
-  `P_Username` varchar(255) DEFAULT NULL
+  `p_cid` char(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `p_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `permissions`
 --
 
-INSERT INTO `permissions` (`P_CID`, `P_Username`) VALUES
+INSERT INTO `permissions` (`p_cid`, `p_username`) VALUES
 ('p01', 'udsy@hotmail.com'),
 ('p02', 'senpru@gmail.com');
 
@@ -69,13 +70,13 @@ INSERT INTO `permissions` (`P_CID`, `P_Username`) VALUES
 -- Indexes for table `patient`
 --
 ALTER TABLE `patient`
-  ADD PRIMARY KEY (`P_id`);
+  ADD PRIMARY KEY (`p_id`);
 
 --
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`P_CID`);
+  ADD PRIMARY KEY (`p_cid`);
 
 --
 -- Constraints for dumped tables
@@ -85,7 +86,7 @@ ALTER TABLE `permissions`
 -- Constraints for table `permissions`
 --
 ALTER TABLE `permissions`
-  ADD CONSTRAINT `permissions_ibfk_1` FOREIGN KEY (`P_CID`) REFERENCES `patient` (`P_id`);
+  ADD CONSTRAINT `permissions_ibfk_1` FOREIGN KEY (`p_cid`) REFERENCES `patient` (`p_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
